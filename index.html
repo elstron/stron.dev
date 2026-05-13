@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Stron - Jose Luis Leyva. Full stack web developer with PHP, Typescript, Javascript, Astro, HTML, CSS and more"
+    />
+    <title>Stron - Jose Luis B. Leyva | Freelance Web developer</title>
+    <style id="preview-style">
+      /* roboto-latin-400-normal */
+      @font-face {
+        font-family: "Roboto";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400;
+        src:
+          url(https://cdn.jsdelivr.net/fontsource/fonts/roboto@latest/latin-400-normal.woff2)
+            format("woff2"),
+          url(https://cdn.jsdelivr.net/fontsource/fonts/roboto@latest/latin-400-normal.woff)
+            format("woff");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+
+      /* roboto-latin-600-normal */
+      @font-face {
+        font-family: "Roboto";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 600;
+        src:
+          url(https://cdn.jsdelivr.net/fontsource/fonts/roboto@latest/latin-600-normal.woff2)
+            format("woff2"),
+          url(https://cdn.jsdelivr.net/fontsource/fonts/roboto@latest/latin-600-normal.woff)
+            format("woff");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      /* google-sans-code-latin-800-normal */
+      @font-face {
+        font-family: "Google Sans Code";
+        font-style: normal;
+        font-display: swap;
+        font-weight: 800;
+        src:
+          url(https://cdn.jsdelivr.net/fontsource/fonts/google-sans-code@latest/latin-800-normal.woff2)
+            format("woff2"),
+          url(https://cdn.jsdelivr.net/fontsource/fonts/google-sans-code@latest/latin-800-normal.woff)
+            format("woff");
+        unicode-range:
+          U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+          U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      body {
+        width: 100%;
+        min-height: 100dvh;
+        display: flex;
+        position: relative;
+        margin: 0;
+        font-family: "Roboto", sans-serif;
+        &::before {
+          z-index: 2;
+        }
+
+        &::after {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background: #020024;
+          background: radial-gradient(
+            circle,
+            rgb(15, 34, 38) 0%,
+            rgb(13, 13, 43) 35%,
+            rgb(2, 0, 36) 100%
+          );
+          z-index: -1;
+        }
+      }
+
+      .grid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(7, 1fr);
+        gap: 4px;
+        mask-image: radial-gradient(circle, transparent 0%, black 100%);
+        -webkit-mask-image:
+          radial-gradient(circle, black 20%, #fff0 100%),
+          radial-gradient(circle, black 20%, #fff0 100%),
+          radial-gradient(circle, black 20%, #fff0 100%),
+          radial-gradient(circle, black 20%, #fff0 100%);
+      }
+
+      .box {
+        background: #ffffff05;
+        border-radius: 20px;
+        &:hover {
+          background-color: #4c527b;
+        }
+      }
+      .box[active] {
+        background-color: #4c527b;
+      }
+      .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        color: #fff;
+      }
+
+      h1 {
+        grid-column: 3 / span 3; /* columnas 3, 4, 5 */
+        grid-row: 3 / span 3; /* filas 3, 4, 5 */
+        text-align: center;
+        font-size: clamp(5rem, 26vw, 20rem);
+        margin: 0;
+        font-family: "Google Sans Code", monospace;
+      }
+      ul {
+        display: flex;
+        gap: 1rem;
+        grid-area: redes;
+        justify-content: center;
+      }
+
+      ul,
+      li {
+        list-style: none;
+      }
+      a {
+        color: beige;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <h1>Stron</h1>
+      <ul>
+        <li>
+          <a href="https://x.com/Stron__" target="_blank">X (twitter) </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/@Stron_" target="_blank">Youtube</a>
+        </li>
+        <li>
+          <a href="https://portfolio.stron.dev/" target="_blank">Portfolio</a>
+        </li>
+        <li>
+          <a href="https://github.com/elstron" target="_blank">Github</a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/jose-luis-b-leyva/"
+            target="_blank"
+            >LinkedIn</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="grid"></div>
+    <script type="module">
+      const grid = document.querySelector(".grid");
+
+      const isTitleCell = (row, col) =>
+        row >= 3 && row <= 5 && col >= 3 && col <= 5;
+
+      let count = 0;
+      for (let row = 1; row <= 7; row++) {
+        for (let col = 1; col <= 7; col++) {
+          if (isTitleCell(row, col)) continue;
+
+          const div = document.createElement("div");
+          div.className = "box";
+          div.style.gridColumn = col;
+          div.style.gridRow = row;
+          grid.appendChild(div);
+
+          count++;
+          if (count >= 35) break;
+        }
+        if (count >= 35) break;
+      }
+
+      function randomIntInRange(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function randomIcon() {
+        let boxses = document.querySelectorAll(".box");
+        let boxSelected = randomIntInRange(0, 30);
+
+        boxses[boxSelected].toggleAttribute("active");
+        setTimeout(() => {
+          boxses[boxSelected].toggleAttribute("active");
+        }, 5000);
+      }
+
+      setInterval(randomIcon, 1000);
+    </script>
+  </body>
+</html>
