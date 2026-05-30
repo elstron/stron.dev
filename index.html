@@ -86,6 +86,14 @@
           z-index: -1;
         }
       }
+      .wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
       .grid {
         width: 100%;
@@ -99,6 +107,19 @@
           radial-gradient(circle, black 20%, #fff0 100%),
           radial-gradient(circle, black 20%, #fff0 100%),
           radial-gradient(circle, black 20%, #fff0 100%);
+      }
+
+      .floatingBox {
+        position: absolute;
+        width: calc(100% / 7 - 4px);
+        height: calc(100% / 7 - 4px);
+        background-color: #4c527b;
+        border-radius: 20px;
+        pointer-events: none;
+        z-index: 2;
+        transition:
+          left 0.3s ease,
+          top 0.3s ease;
       }
 
       .box {
@@ -174,9 +195,11 @@
         </li>
       </ul>
     </div>
+    <span class="floatingBox"></span>
     <div class="grid"></div>
-    <script type="module">
+    <script>
       const grid = document.querySelector(".grid");
+      const floatingBox = document.querySelector(".floatingBox");
 
       const isTitleCell = (row, col) =>
         row >= 3 && row <= 5 && col >= 3 && col <= 5;
@@ -190,6 +213,7 @@
           div.className = "box";
           div.style.gridColumn = col;
           div.style.gridRow = row;
+          div.style.anchorName = `--${row}-${col}`;
           grid.appendChild(div);
 
           count++;
@@ -198,6 +222,14 @@
         if (count >= 35) break;
       }
 
+      grid.addEventListener("mousemove", (e) => {
+        if (e.target.classList.contains("box")) {
+          const anchorName = e.target.style.anchorName;
+          floatingBox.style.left = `anchor(${anchorName} start)`;
+          floatingBox.style.top = `anchor(${anchorName} start)`;
+        }
+      });
+
       function randomIntInRange(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
@@ -205,8 +237,13 @@
       function randomIcon() {
         let boxses = document.querySelectorAll(".box");
         let boxSelected = randomIntInRange(0, 30);
+        const anchorName = boxses[boxSelected].style.anchorName;
 
         boxses[boxSelected].toggleAttribute("active");
+
+        floatingBox.style.left = `anchor(${anchorName} start)`;
+        floatingBox.style.top = `anchor(${anchorName} start)`;
+
         setTimeout(() => {
           boxses[boxSelected].toggleAttribute("active");
         }, 5000);
