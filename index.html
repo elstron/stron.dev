@@ -223,11 +223,11 @@
       }
 
       grid.addEventListener("mousemove", (e) => {
-        if (e.target.classList.contains("box")) {
-          const anchorName = e.target.style.anchorName;
-          floatingBox.style.left = `anchor(${anchorName} start)`;
-          floatingBox.style.top = `anchor(${anchorName} start)`;
-        }
+        if (!e.target.classList.contains("box")) return;
+
+        const anchorName = e.target.style.anchorName;
+        floatingBox.style.left = `anchor(${anchorName} start)`;
+        floatingBox.style.top = `anchor(${anchorName} start)`;
       });
 
       function randomIntInRange(min, max) {
