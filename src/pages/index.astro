@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+---
+
+<Layout
+  title="Stron - Jose Luis B. Leyva | Freelance Web developer"
+  description="Stron - Jose Luis Leyva. Full stack web developer with PHP, Typescript, Javascript, Astro, HTML, CSS and more"
+>
+  <div class="grid-container">
+    <span class="floatingBox"></span>
+    <div class="grid"></div>
+  </div>
+  <div class="content">
+    <span>I'm</span>
+    <h1>STRON</h1>
+    <SocialLinks />
+  </div>
+</Layout>
+<script is:inline src="/icons.js"></script>
+<script is:inline>
+  const grid = document.querySelector('.grid');
+  const floatingBox = document.querySelector('.floatingBox');
+
+  const isTitleCell = (row, col) => row >= 3 && row <= 5 && col >= 3 && col <= 5;
+
+  let count = 0;
+  for (let row = 1; row <= icons.length; row++) {
+    for (let col = 1; col <= icons.length; col++) {
+      if (isTitleCell(row, col)) continue;
+
+      let icon = row % 2 === 0 ? icons[row - 1] : icons[col - 1];
+      let svg = svgTemplate(icon);
+
+      const div = document.createElement('div');
+      const svgContainer = document.createElement('div');
+      svgContainer.classList.add('svg-container');
+      svgContainer.innerHTML = svg;
+
+      div.className = 'box';
+      div.style.gridColumn = col;
+      div.style.gridRow = row;
+      div.style.anchorName = `--${row}-${col}`;
+      div.appendChild(svgContainer);
+      grid.appendChild(div);
+
+      count++;
+      if (count >= 35) break;
+    }
+    if (count >= 35) break;
+  }
+
+  grid.addEventListener('mousemove', (e) => {
+    if (!e.target.classList.contains('box')) return;
+
+    const anchorName = e.target.style.anchorName;
+    floatingBox.style.left = `anchor(${anchorName} start)`;
+    floatingBox.style.top = `anchor(${anchorName} start)`;
+  });
+
+  function svgTemplate(icon) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${icon?.width ?? 24} ${icon?.width ?? 24}" preserveAspectRatio="xMidYMid meet" >${icon?.body}</svg>`;
+  }
+
+  function randomIntInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function selectRandomCell() {
+    let boxses = document.querySelectorAll('.box');
+    let boxSelected = randomIntInRange(0, 30);
+    const anchorName = boxses[boxSelected].style.anchorName;
+
+    boxses[boxSelected].toggleAttribute('active');
+
+    floatingBox.style.left = `anchor(${anchorName} start)`;
+    floatingBox.style.top = `anchor(${anchorName} start)`;
+
+    setTimeout(() => {
+      boxses[boxSelected].toggleAttribute('active');
+    }, 1000);
+  }
+
+  setInterval(selectRandomCell, 5000);
+</script>
+
+<style id="preview-style" is:inline>
+  body {
+    width: 100%;
+    min-height: 100dvh;
+    font-size: small;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0;
+    color: white;
+    &::before {
+      z-index: 2;
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: #020024;
+      background: radial-gradient(
+        circle,
+        rgb(15, 34, 38) 0%,
+        rgb(13, 13, 43) 35%,
+        rgb(2, 0, 36) 100%
+      );
+      z-index: -1;
+    }
+  }
+  .grid-container {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .grid {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 4px;
+    mask-image: radial-gradient(circle, transparent 0%, black 100%);
+    -webkit-mask-image:
+      radial-gradient(circle, black 20%, #fff0 100%),
+      radial-gradient(circle, black 20%, #fff0 100%),
+      radial-gradient(circle, black 20%, #fff0 100%), radial-gradient(circle, black 20%, #fff0 100%);
+  }
+
+  .floatingBox {
+    position: absolute;
+    width: calc(100% / 7 - 4px);
+    height: calc(100% / 7 - 4px);
+    background-color: #4c527b1f;
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 2;
+    transition:
+      left 0.3s ease,
+      top 0.3s ease;
+  }
+
+  .box {
+    background: #ffffff05;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & > .svg-container {
+      max-width: 48px;
+      width: 100%;
+      padding: 0.2rem;
+      & svg {
+        width: 100%;
+        height: auto;
+        display: none;
+      }
+    }
+  }
+  .box[active],
+  .box:hover {
+    background-color: #4c527b;
+
+    & svg {
+      display: block;
+    }
+  }
+  .content {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: -65dvh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+    color: #fff;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 12vw, 9rem);
+    grid-column: 3 / span 3; /* columnas 3, 4, 5 */
+    grid-row: 3 / span 3; /* filas 3, 4, 5 */
+    text-align: center;
+    margin: 0;
+  }
+</style>
